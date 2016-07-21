@@ -31,6 +31,8 @@ public class TileController : MonoBehaviour {
 
 	}
 
+	/* TODO: Make this method more...well...more Candy Crash style. */
+
 	private void fallFromSky(){
 		if (b_isFallingFromTheSky) {
 			Vector3 pos = this.transform.position;

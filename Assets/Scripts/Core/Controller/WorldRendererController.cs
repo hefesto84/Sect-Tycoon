@@ -5,6 +5,7 @@ public class WorldRendererController : MonoBehaviour {
 
 	public GameObject baseTile;
 	private int m_tilesCreated = 0;
+	private GameObject m_baseWorld;
 
 	void Start () {
 	
@@ -15,6 +16,9 @@ public class WorldRendererController : MonoBehaviour {
 	}
 
 	public void Render(World world){
+
+		createBaseWorld ();
+
 		Logger.getInstance ().log ("Rendering world...");
 		for (int i = 0; i < world.height; i++) {
 			for (int j = 0; j < world.width; j++) {
@@ -27,12 +31,16 @@ public class WorldRendererController : MonoBehaviour {
 	public void Render(Tile[,] tiles){
 		Logger.getInstance ().log ("Rendering subworld...");
 	}
+		
+	/* TODO: This method needs optimization. If we animate a lot of game objects with a collider attached, profiler says us that 
+	 * we are doing too much work.
+	 */
 
 	private void createTile(int i, int j){
 
 		GameObject go = GameObject.Instantiate (baseTile);
 		go.name = "tile-" + i + "," + j;
-		go.transform.SetParent (this.transform);
+		go.transform.SetParent (m_baseWorld.transform);
 
 		int initialHeight = Random.Range (10, 20);
 
@@ -48,5 +56,14 @@ public class WorldRendererController : MonoBehaviour {
 		((TileController)go.AddComponent<TileController> ()).Animate (from, to);
 	
 		m_tilesCreated++;
+	}
+		
+	private void createBaseWorld(){
+		
+		GameObject.DestroyImmediate (m_baseWorld);
+		m_baseWorld = new GameObject ();
+		m_baseWorld.name = "m_baseWorld";
+		m_baseWorld.transform.SetParent (this.transform);
+
 	}
 }

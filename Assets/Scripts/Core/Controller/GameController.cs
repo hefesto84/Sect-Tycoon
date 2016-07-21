@@ -20,6 +20,10 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void InitGame(){
+		InitWorld ();
+	}
+
+	public void InitWorld(){
 		Logger.getInstance ().log ("Initializing World...");
 		world = new World ();
 		world.Init ();
