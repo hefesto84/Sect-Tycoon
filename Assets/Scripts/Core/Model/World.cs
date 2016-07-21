@@ -24,9 +24,19 @@ public class World {
 
 		for (int i = 0; i < Constants.C_DEFAULT_WORLD_TILES_H; i++) {
 			for(int j = 0; j<Constants.C_DEFAULT_WORLD_TILES_W; j++){
-				//tiles[i,j].tiles = { { 1, 2, 3 }, { 4, 5, 6 } };
-				//tiles[i,j].tiles = new Tile[Constants.C_DEFAULT_WORLD_TILES_W, Constants.C_DEFAULT_WORLD_TILES_H];
+
 				Logger.getInstance ().log ("Populating inner tiles...");
+
+				this.tiles [i, j] = new Tile ();
+				this.tiles[i,j].tiles = new Tile[Constants.C_DEFAULT_WORLD_TILES_W, Constants.C_DEFAULT_WORLD_TILES_H];
+
+				for (int k = 0; k < Constants.C_DEFAULT_WORLD_TILES_H; k++) {
+					for (int l = 0; l < Constants.C_DEFAULT_WORLD_TILES_W; l++) {
+						this.tiles [i, j].tiles [k, l] = new Tile ();
+					}
+				}
+
+
 			}
 		}
 		Logger.getInstance ().log ("World created...");

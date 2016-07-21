@@ -17,6 +17,7 @@ public class Tile{
 	/* Constructors */
 
 	public Tile(){
+		//tiles = new Tile[Constants.C_DEFAULT_WORLD_TILES_W, Constants.C_DEFAULT_WORLD_TILES_H];
 
 	}
 
