@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TileController : MonoBehaviour {
 
+	public GameObject placeholderCube;
+
 	private bool b_isFallingFromTheSky = false;
 	private Vector3 m_source, m_destination;
+	private Stack<GameObject> m_children = new Stack<GameObject> ();
 
 	void Start () {
 	
@@ -41,6 +45,14 @@ public class TileController : MonoBehaviour {
 			pos.z = m_destination.z;
 			this.transform.position = pos;
 		}
+	}
+
+	public bool AddPlaceholderCube(){
+		GameObject phCube = GameObject.Instantiate (placeholderCube);
+		phCube.transform.SetParent (this.transform);
+		phCube.transform.localPosition = new Vector3 (0, 0, (m_children.Count == 0) ? -0.5f : (-0.5f - m_children.Count));
+		m_children.Push (phCube);
+		return true;
 	}
 
 }
