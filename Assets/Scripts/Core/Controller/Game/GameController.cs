@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour {
 	private World world;
 
 	private WorldRendererController worldRendererController;
+	private ResourcesManager resourcesManager;
 
 	void Awake(){
 		worldRendererController = this.GetComponent<WorldRendererController> ();
@@ -28,7 +29,14 @@ public class GameController : MonoBehaviour {
 		world = new World ();
 		world.Init ();
 		Logger.getInstance ().log ("World initialized.");
+		Logger.getInstance ().log ("Initializing listeners.");
+		initListeners ();
 		worldRendererController.Render (world);
 		Logger.getInstance ().log ("World rendered.");
+
+	}
+
+	private void initListeners(){
+		EventManager.getInstance ().OnProductionBuildingUpdateListener += ResourcesManager.getInstance().onProductionBuildingUpdateHandler;
 	}
 }

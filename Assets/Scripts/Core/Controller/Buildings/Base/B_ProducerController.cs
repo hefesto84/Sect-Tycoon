@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class B_ProducerController : MonoBehaviour {
+public class B_ProducerController : MonoBehaviour {
 	
 	private Production production;
 
